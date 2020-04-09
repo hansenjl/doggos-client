@@ -9,7 +9,8 @@ class DogsContainer extends React.Component {
     render(){
         return(
             <div>
-                {this.props.loading ? <p>LOADING PUPPERS...</p> : this.props.dogs.slice(0,30).map(d => <Dog url={d} />)}
+                 <h3>Click on any dog image to favorite it! </h3>
+                {this.props.loading ? <p>LOADING PUPPERS...</p> : this.props.dogs.slice(0,30).map(d => <Dog key={d.id} id={d.id} url={d.url} fav={false} />)}
             </div>
         )
     }
