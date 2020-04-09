@@ -34,7 +34,7 @@ const dogReducer = (state = {dogs:[], favorites: [], loading: false}, action) =>
             return state
     }
 }
-
+ 
 export default dogReducer
 
 

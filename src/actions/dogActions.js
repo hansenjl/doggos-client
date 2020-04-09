@@ -1,5 +1,5 @@
 // Action Creators sent to the reducer
-
+ 
 const setFavoriteDogs = dogs => {
     return {
         type: 'FAVORITE_DOGS_LOADED',

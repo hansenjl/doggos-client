@@ -5,4 +5,4 @@ const rootReducer = combineReducers({
     dogReducer
 })
 
-export default rootReducer
+export default rootReducer 
