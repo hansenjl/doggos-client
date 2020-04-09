@@ -8,9 +8,24 @@ const setFavoriteDogs = dogs => {
 }
 
 const setAllDogs = dogs => {
+
     return {
         type: 'ALL_DOGS_LOADED',
         payload: dogs
+    }
+}
+
+const removedDog = dog => {
+    return {
+        type: 'REMOVED_DOG',
+        payload: dog
+    }
+}
+
+const addedDog = dog => {
+    return {
+        type: 'ADDED_DOG',
+        payload: dog
     }
 }
 
@@ -22,7 +37,10 @@ export const getAllDogs = () => {
         dispatch({type: 'FETCHING_DOGS'})
         return fetch('https://random.dog/doggos')
         .then(res => res.json())
-        .then(dogs => dispatch(setAllDogs(dogs.filter(d => d.toLowerCase().endsWith('.jpg')))))
+        .then(dogs => {
+            let mutatedDogs = dogs.filter(d => d.toLowerCase().endsWith('.jpg')).map((d,idx) => ({url: d, id: idx }))
+            return dispatch(setAllDogs(mutatedDogs))
+        })
     }
 }
 
@@ -35,6 +53,29 @@ export const getFavoriteDogs = () => {
     }
 }
 
+export const addDog = (dog) =>{
+    return (dispatch) => {
+        return fetch('http://localhost:3001/dogs', {
+            method: "POST",
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({dog: dog})
+          })
+        .then(res => res.json())
+        .then(dog => dispatch(addedDog(dog)))
+    }
+
+}
+
+export const removeDog = (dog) =>{
+    return (dispatch) => {
+        return fetch(`http://localhost:3001/dogs/${dog.id}`, {method: 'delete'})
+        .then(res => res.json())
+        .then(dispatch(removedDog(dog)))
+    }
+
+}
 
 
 
