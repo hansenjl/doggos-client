@@ -15,7 +15,8 @@ class FavDogsContainer extends React.Component {
     render(){
         return(
             <div>
-                {this.props.loading ? <p>LOADING YOUR FAVORITE PUPPERS...</p> : this.props.dogs.map(d => <Dog url={d.url} likes={d.likes}/>)}
+                <h3> Here are your favorite dogs! Click on any image to unfavorite</h3>
+                {this.props.loading ? <p>LOADING YOUR FAVORITE PUPPERS...</p> : this.props.dogs.map(d => <Dog key={d.id} url={d.url} id={d.id} fav={true}/>)}
             </div>
         )
     }
